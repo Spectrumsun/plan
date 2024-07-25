@@ -13,6 +13,7 @@ import { WebhookController } from './webhook/webhook.controller';
 import { UploadModule } from './upload/upload.module';
 import { ConfigModule } from '@nestjs/config';
 import { SubscriptionMiddleware } from './middleware/subscriptionMiddleware';
+import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { SubscriptionMiddleware } from './middleware/subscriptionMiddleware';
     PlanModule,
     SubscriptionModule,
     UploadModule,
+    WebhookModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   providers: [ResponseHelper],

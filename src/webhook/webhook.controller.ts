@@ -1,20 +1,26 @@
-import { Controller, Post, Body, Headers, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Post, Body, Req, Res, Get } from '@nestjs/common';
+import { Request, Response } from 'express';
+import { ResponseHelper } from '../helpers/response.helper';
 
 @Controller('webhook')
 export class WebhookController {
-  @Post()
-  handleWebhook(
-    @Body() body: any,
-    @Headers() headers: any,
-    @Req() request: Request,
-  ) {
-    // console.log('Received webhook:', {
-    //   body,
-    //   headers,
-    //   rawBody: request.rawBody,
-    // });
+  constructor(private readonly responseHelper: ResponseHelper) {}
 
-    return { received: true };
+  @Post()
+  async handleWebhook(
+    @Body() payload: any,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    console.log('Received webhook:', payload);
+    res.status(200).send('Webhook received');
+  }
+
+  @Get()
+  async paymentRedirect(@Res() res: Response) {
+    return this.responseHelper.success(
+      res,
+      'Successful, Check your payment plan',
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable, ForbiddenException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ResponseHelper } from '../helpers/response.helper';
 import { Response } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
@@ -110,7 +110,6 @@ export class SubscriptionService {
           }),
         ),
     );
-    console.log(result, 'result result');
     return result;
   }
 }
