@@ -88,6 +88,8 @@ export class SubscriptionService {
         planId: findPlan.id,
         userId: userData.id,
       },
+      planId: findPlan.id,
+      userId: userData.id,
     };
 
     const result = await this.httpRequest(data);
