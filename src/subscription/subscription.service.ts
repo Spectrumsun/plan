@@ -86,6 +86,7 @@ export class SubscriptionService {
       amount: findPlan.price,
       metadata: {
         planId: findPlan.id,
+        userId: userData.id,
       },
     };
 

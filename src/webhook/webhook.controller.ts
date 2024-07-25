@@ -1,10 +1,14 @@
 import { Controller, Post, Body, Req, Res, Get } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ResponseHelper } from '../helpers/response.helper';
+import { WebhookService } from './webhook.service';
 
 @Controller('webhook')
 export class WebhookController {
-  constructor(private readonly responseHelper: ResponseHelper) {}
+  constructor(
+    private readonly responseHelper: ResponseHelper,
+    private readonly webhookService: WebhookService,
+  ) {}
 
   @Post()
   async handleWebhook(
@@ -14,6 +18,7 @@ export class WebhookController {
   ) {
     console.log('Received webhook:', payload);
     res.status(200).send('Webhook received');
+    this.webhookService.createPlan(payload, res);
   }
 
   @Get()
