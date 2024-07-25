@@ -1,9 +1,9 @@
 # Upload API 
-Backend service to upload 
+Backend service to upload
 
 # View App
     * Backend Hosted API https://plan-wjzs.onrender.com/api/v1
-
+    # Postman Collection https://documenter.getpostman.com/view/3130485/2sA3kYhzPf
 
 # Technologies Used
    * Back-end: NestJS, Posgresql/Prisma, JWT Token
@@ -42,8 +42,7 @@ Backend service to upload
 # FAQs
 * Contact spectrumsun@hotmail.com
 
-
 # LICENSE
-* [MIT](./LICENSE) © [Taiwo Sunday]
+* [MIT](./LICENSE) © [Sunday Taiwo]
 
-Copyright (c) 2018 Taiwo Sunday
+Copyright (c) 2024 Sunday Taiwo
