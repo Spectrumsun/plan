@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String @unique
+  password String
+  firstName String
+  lastName String
+  subcription Subscription?
+  upload Upload[]
+
+  @@map("users")
+}
+
+model Plan {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String
+  description String
+  price Int
+  validity Int
+  subcription Subscription[]
+
+  @@map("plans")
+}
+
+model Subscription {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  planId Int
+  userId Int @unique
+  amountPaid Int
+  paymentId String
+  paymentGateway String
+  paymentMethod String
+  planStartDate DateTime
+  planEndDate DateTime
+
+  user User @relation(fields: [userId], references: [id])
+  plan Plan @relation(fields: [planId], references: [id])
+
+  @@map("subscriptions")
+}
+
+model Upload {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId Int
+  url String
+  metaData Json
+  publicId String
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("uploads")
+}
