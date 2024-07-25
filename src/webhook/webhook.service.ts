@@ -12,7 +12,7 @@ export class WebhookService {
   async createPlan(payload: any, res: Response): Promise<void> {
     try {
       console.log(payload.event, 'payload.event');
-      console.log(payload.data)
+      console.log(payload.data.metaData, 'meta')
       if (payload.event !== 'charge.success') {
         return this.responseHelper.error(res, 'Payment was not successful');
       }
