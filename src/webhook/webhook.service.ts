@@ -11,10 +11,7 @@ export class WebhookService {
 
   async createPlan(payload: any, res: Response): Promise<void> {
     try {
-      console.log(payload, 'payload.event');
-      console.log(payload.data, 'meta')
-      const value = JSON.stringify(payload.data);
-      console.log(value, 'value value')
+      console.log(payload.data.metadata, 'meta')
       if (payload.event !== 'charge.success') {
         return this.responseHelper.error(res, 'Payment was not successful');
       }
@@ -25,8 +22,8 @@ export class WebhookService {
 
       const create = await this.prisma.subscription.create({
         data: {
-          planId: Number(payload.data.metaData.planId),
-          userId: Number(payload.data.metaData.userId),
+          planId: Number(payload.data.metadata.planId),
+          userId: Number(payload.data.metadata.userId),
           amountPaid: Number(payload.data.amount),
           paymentId: payload.data.id,
           paymentGateway: 'Paystack',

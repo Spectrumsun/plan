@@ -17,7 +17,6 @@ export class WebhookController {
     @Res() res: Response,
   ) {
     this.webhookService.createPlan(payload, res);
-    // console.log('Received webhook:', payload);
     res.status(200).send('Webhook received');
   }
 
