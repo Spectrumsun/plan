@@ -84,6 +84,9 @@ export class SubscriptionService {
     const data = {
       email: userData.email,
       amount: findPlan.price,
+      metadata: {
+        planId: findPlan.id,
+      },
     };
 
     const result = await this.httpRequest(data);
