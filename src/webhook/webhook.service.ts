@@ -13,6 +13,8 @@ export class WebhookService {
     try {
       console.log(payload.event, 'payload.event');
       console.log(payload.data.metaData, 'meta')
+      const value = JSON.parse(payload.data);
+      console.log(value, 'value value')
       if (payload.event !== 'charge.success') {
         return this.responseHelper.error(res, 'Payment was not successful');
       }
