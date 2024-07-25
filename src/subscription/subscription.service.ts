@@ -93,7 +93,7 @@ export class SubscriptionService {
     const result = await this.httpRequest(data);
     return this.responseHelper.success(
       res,
-      'Click the url to pay, ',
+      'Open the the url in a browser to make payment',
       result.data,
     );
   }

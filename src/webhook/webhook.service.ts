@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { ResponseHelper } from '../helpers/response.helper';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 @Injectable()
 export class WebhookService {
   constructor(
@@ -11,6 +11,8 @@ export class WebhookService {
 
   async createPlan(payload: any, res: Response): Promise<void> {
     try {
+      console.log(payload.event, 'payload.event');
+      console.log(payload.data)
       if (payload.event !== 'charge.success') {
         return this.responseHelper.error(res, 'Payment was not successful');
       }
@@ -33,7 +35,7 @@ export class WebhookService {
       });
       console.log('Successful', create);
     } catch (error) {
-      console.log('An error occurred');
+      console.log('An error occurred', error);
     }
   }
 }
