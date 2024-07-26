@@ -25,7 +25,7 @@ export class WebhookService {
           planId: Number(payload.data.metadata.planId),
           userId: Number(payload.data.metadata.userId),
           amountPaid: Number(payload.data.amount),
-          paymentId: payload.data.id,
+          paymentId: payload.data.id.toString(),
           paymentGateway: 'Paystack',
           paymentMethod: payload.data.channel,
           planStartDate: startDate,
