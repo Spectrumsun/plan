@@ -1,4 +1,3 @@
-// src/auth/auth.service.ts
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { SignUpUserDto, SignInUserDto } from './dto';
