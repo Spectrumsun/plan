@@ -2,6 +2,7 @@ import { Controller, Post, Body, Req, Res, Get } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ResponseHelper } from '../helpers/response.helper';
 import { WebhookService } from './webhook.service';
+import * as crypto from 'crypto';
 
 @Controller('webhook')
 export class WebhookController {
@@ -17,9 +18,18 @@ export class WebhookController {
     @Res() res: Response,
   ) {
     console.log('running.....');
-    console.log(payload, 'payload');
-    this.webhookService.createPlan(payload, res);
+    const hash = crypto
+      .createHmac('sha512', process.env.PAY_STACK_SECRET_KEY)
+      .update(JSON.stringify(req.body))
+      .digest('hex');
     res.status(200).send('Webhook received');
+
+    if (hash == req.headers['x-paystack-signature']) {
+      console.log('verify');
+      this.webhookService.createPlan(payload, res);
+    } else {
+      console.log('invalid signature');
+    }
   }
 
   @Get()

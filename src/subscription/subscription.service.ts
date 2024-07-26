@@ -5,6 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateSubscriptionDto } from './dto';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class SubscriptionService {
@@ -112,6 +113,7 @@ export class SubscriptionService {
         })
         .pipe(
           catchError((error: any) => {
+            console.log(error, 'error');
             throw 'An error happened!';
           }),
         ),
